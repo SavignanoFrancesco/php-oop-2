@@ -2,13 +2,17 @@
 //inizializzazione oggetto
 class User{
     //variabili necessarie alla creazione della istanza
+    public $id;
     public $name;
     public $lastname;
     public $email;
     public $date_of_birth;
 
     //costruttore con le variabili necessarie alla creazione dell'istanza
-    function __construct($_name, $_lastname, $_email, $_date_of_birth){
+    function __construct($_id, $_name, $_lastname, $_email, $_date_of_birth){
+
+        //id autoincrementato
+        $this->id = $_id;
 
         //se il nome o cognome contiene caratteri diversi da lettere lanca un errore
         if(!preg_match("/^[a-zA-Z]+$/", $_name) || !preg_match("/^[a-zA-Z]+$/", $_lastname)) {
