@@ -75,6 +75,10 @@ class User{
     public function setNote($text){
         $this->note = $text;
     }
+
+    public function setPremium(){
+        $this->premium = 1;
+    }
 }
 
 //sotto classe di User con vantaggi premium account
