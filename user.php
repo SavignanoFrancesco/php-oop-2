@@ -2,7 +2,7 @@
 //inizializzazione oggetto
 class User{
     //variabili necessarie alla creazione della istanza
-    public $id;
+    public $User_id;
     public $name;
     public $lastname;
     public $email;
@@ -12,10 +12,10 @@ class User{
     public $note;
 
     //costruttore con le variabili necessarie alla creazione dell'istanza
-    public function __construct($_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium){
+    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium){
 
-        //id autoincrementato
-        $this->id = $_id;
+        //User_id autoincrementato
+        $this->User_id = $_User_id;
 
         //se il nome o cognome contiene caratteri diversi da lettere lanca un errore
         if(!preg_match("/^[a-zA-Z]+$/", $_name) || !preg_match("/^[a-zA-Z]+$/", $_lastname)) {
@@ -25,15 +25,15 @@ class User{
             $this->lastname = $_lastname;
         }
 
-        //validazione email
+        //valUser_idazione email
         if(!preg_match("/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/",$_email)){
-            throw new Exception($email.": Invalid email!");
-            //die ("Invalid Email-ID");
+            throw new Exception($email.": InvalUser_id email!");
+            //die ("InvalUser_id Email-ID");
         }else{
             $this->email = $_email;
         }
 
-        //validazione data di nascita
+        //valUser_idazione data di nascita
         if (DateTime::createFromFormat('Y-m-d', $_date_of_birth) === FALSE) {
             throw new Exception($date_of_birth.": Formato data deve essere yyyy-mm-dd!");
         }else{
@@ -84,7 +84,7 @@ class User{
 //sotto classe di User con vantaggi premium account
 class PremiumUser extends User {
 
-    public $id;
+    public $User_id;
     public $name;
     public $lastname;
     public $email;
@@ -93,8 +93,16 @@ class PremiumUser extends User {
     public $premium;
     public $note;
 
+    //premium
+    public $PremiumUser_id = - 1;
     //sconto di default
     public $discount = 20;
+
+    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium, $_tmp_PremiumUser_id){
+        parent::__construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium, $_tmp_PremiumUser_id);
+        $this->PremiumUser_id = $_tmp_PremiumUser_id;
+    }
+
 
 }
 ?>
