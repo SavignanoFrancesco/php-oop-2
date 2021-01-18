@@ -7,9 +7,12 @@ class User{
     public $lastname;
     public $email;
     public $date_of_birth;
+    public $document_type;
+    public $premium;
+    public $note;
 
     //costruttore con le variabili necessarie alla creazione dell'istanza
-    function __construct($_id, $_name, $_lastname, $_email, $_date_of_birth){
+    public function __construct($_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium){
 
         //id autoincrementato
         $this->id = $_id;
@@ -36,6 +39,12 @@ class User{
         }else{
             $this->date_of_birth = $_date_of_birth;
         }
+
+        //
+        $this->document_type = $_document_type;
+
+        //
+        $this->premium = $_premium;
     }
 
     //metodo per stampare le informazioni dell'oggetto User
@@ -62,5 +71,26 @@ class User{
         return $user_data;
 
     }
+
+    public function setNote($text){
+        $this->note = $text;
+    }
+}
+
+//sotto classe di User con vantaggi premium account
+class PremiumUser extends User {
+
+    public $id;
+    public $name;
+    public $lastname;
+    public $email;
+    public $date_of_birth;
+    public $document_type;
+    public $premium;
+    public $note;
+
+    //sconto di default
+    public $discount = 20;
+
 }
 ?>
