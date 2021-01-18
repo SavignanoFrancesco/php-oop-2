@@ -7,12 +7,12 @@ class User{
     public $lastname;
     public $email;
     public $date_of_birth;
-    public $document_type;
+    public $payment_method;
     public $premium;
     public $note;
 
     //costruttore con le variabili necessarie alla creazione dell'istanza
-    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium){
+    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_payment_method, $_premium){
 
         //User_id autoincrementato
         $this->User_id = $_User_id;
@@ -41,7 +41,7 @@ class User{
         }
 
         //
-        $this->document_type = $_document_type;
+        $this->payment_method = $_payment_method;
 
         //
         $this->premium = $_premium;
@@ -89,7 +89,7 @@ class PremiumUser extends User {
     public $lastname;
     public $email;
     public $date_of_birth;
-    public $document_type;
+    public $payment_method;
     public $premium;
     public $note;
 
@@ -98,8 +98,8 @@ class PremiumUser extends User {
     //sconto di default
     public $discount = 20;
 
-    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium, $_tmp_PremiumUser_id){
-        parent::__construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_document_type, $_premium, $_tmp_PremiumUser_id);
+    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_payment_method, $_premium, $_tmp_PremiumUser_id){
+        parent::__construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_payment_method, $_premium, $_tmp_PremiumUser_id);
         $this->PremiumUser_id = $_tmp_PremiumUser_id;
     }
 
