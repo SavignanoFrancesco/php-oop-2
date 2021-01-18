@@ -30,7 +30,7 @@ class User{
             $this->email = $_email;
         }
 
-        //valUser_idazione data di nascita
+        //validazione data di nascita
         if (DateTime::createFromFormat('Y-m-d', $_date_of_birth) === FALSE) {
             throw new Exception($date_of_birth.": Formato data deve essere yyyy-mm-dd!");
         }else{
@@ -63,14 +63,9 @@ class User{
 
     }
 
-
-
-    // public function setPremium(){
-    //     $this->premium = 1;
-    // }
 }
 
-//sotto classe di User con vantaggi premium account
+//sotto classe di User con dati pagamento
 class SubscriptionPayment extends User {
 
     public $User_id;
@@ -83,6 +78,7 @@ class SubscriptionPayment extends User {
     public $payment_made;
     public $note;
 
+    //aggiungo parametri al costruttore
     public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_Payment_id, $_payment_method, $_payment_made){
         parent::__construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_Payment_id, $_payment_method, $_payment_made);
 
@@ -92,6 +88,7 @@ class SubscriptionPayment extends User {
 
     }
 
+    //funzione per scrivere note
     public function setNote($text){
         $this->note = $text;
     }
