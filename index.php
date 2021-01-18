@@ -5,46 +5,34 @@ require_once 'user.php';
 
 //id da autoincrementare ad ogni nuova istanza
 $tmp_User_id = -1;
+$tmp_Payment_id = -1;
 
-//id da autoincrementare ad ogni nuova istanza
-$tmp_PremiumUser_id = -1;
-
-//___________USER1___________
-//creo una nuova istanza della classe User
-$user1 = new User(++$tmp_User_id, 'Francesco', 'Savignano', 'francesco.savignano@gmail.com', '1996-04-21', 'No payment method added', 0);
-$user1->setPremium();
-if($user1->premium > 0){
-    $user1 = new PremiumUser($tmp_User_id, 'Francesco', 'Savignano', 'francesco.savignano@gmail.com', '1996-04-21', 'PayPal', 1, ++$tmp_PremiumUser_id);
-}
+//USER1
+$user0 = new User(++$tmp_User_id, 'Francesco', 'Savignano', 'francesco.savignano@gmail.com', '1996-04-21');
 //stampa le informazioni dell'utente(istanza)
+echo '<h1>USER ID: 0</h1>';
+$user0->printInfo($user0);
+//salva le informazioni dell'utente(istanza) in un'array associativo
+$user0_data = $user0->getInfo($user0);
+var_dump($user0_data);
+//USER2
+$user1 = new User(++$tmp_User_id, 'Anna', 'Verdi', 'anna.verdi@libero.it', '2002-11-01');
+//stampa le informazioni dell'utente(istanza)
+echo '<h1>USER ID: 1</h1>';
 $user1->printInfo($user1);
 //salva le informazioni dell'utente(istanza) in un'array associativo
 $user1_data = $user1->getInfo($user1);
 var_dump($user1_data);
 
-//___________USER2___________
-//creo una nuova istanza della classe User
-$user2 = new User(++$tmp_User_id, 'Marco', 'Rossi', 'marco.rossi@gmail.it', '1990-11-01', 'No payment method added', 0);
-if($user2->premium > 0){
-    $user2 = new PremiumUser($tmp_User_id, 'Marco', 'Rossi', 'marco.rossi@gmail.it', '1990-11-01', 'Bank Transfer', 1, ++$tmp_PremiumUser_id);
-}
-//funzione per aggiungere testo a note
-$user2->setNote('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
-//stampa le informazioni dell'utente(istanza)
-$user2->printInfo($user2);
-//salva le informazioni dell'utente(istanza) in un'array associativo
-$user2_data = $user2->getInfo($user2);
-var_dump($user2_data);
-
-//___________USER3___________
-//creo una nuova istanza della classe User
-$user3 = new User(++$tmp_User_id, 'Anna', 'Verdi', 'anna.verdi@libero.it', '2002-03-13', 'No payment method added', 0);
-$user3->setPremium();
-if($user3->premium > 0){
-    $user3 = new PremiumUser($tmp_User_id, 'Anna', 'Verdi', 'anna.verdi@libero.it', '2002-03-13', 'Bank Transfer', 1, ++$tmp_PremiumUser_id);
-}
-//stampa le informazioni dell'utente(istanza)
-$user3->printInfo($user3);
-//salva le informazioni dell'utente(istanza) in un'array associativo
-$user3_data = $user3->getInfo($user3);
-var_dump($user3_data);
+//passo l'id dell'utente alla sottoclasse pagamento(pagamenti utente_id=0)
+$payment0 = new SubscriptionPayment(0, 'Francesco', 'Savignano', 'francesco.savignano@gmail.com', '1996-04-21',++$tmp_Payment_id,'Paypal','2001-02-22 19:08:56');
+$payment0->setNote('Qualche problema con il pagamento');
+$payment1 = new SubscriptionPayment(0, 'Francesco', 'Savignano', 'francesco.savignano@gmail.com', '1996-04-21',++$tmp_Payment_id,'Bank Transfer','2001-09-12 06:08:56');
+$payment2 = new SubscriptionPayment(1, 'Anna', 'Verdi', 'anna.verdi@libero.it', '2002-11-01', ++$tmp_Payment_id, 'Bank Transfer', '2002-08-08 10:08:56');
+//stampo le informazioni dei pagamenti
+echo '<h1>PAYMENT ID: 0</h1>';
+$payment0->printInfo($payment0);
+echo '<h1>PAYMENT ID: 1</h1>';
+$payment1->printInfo($payment1);
+echo '<h1>PAYMENT ID: 2</h1>';
+$payment2->printInfo($payment2);

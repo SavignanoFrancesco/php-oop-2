@@ -7,12 +7,9 @@ class User{
     public $lastname;
     public $email;
     public $date_of_birth;
-    public $payment_method;
-    public $premium;
-    public $note;
 
     //costruttore con le variabili necessarie alla creazione dell'istanza
-    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_payment_method, $_premium){
+    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth){
 
         //User_id autoincrementato
         $this->User_id = $_User_id;
@@ -40,11 +37,6 @@ class User{
             $this->date_of_birth = $_date_of_birth;
         }
 
-        //
-        $this->payment_method = $_payment_method;
-
-        //
-        $this->premium = $_premium;
     }
 
     //metodo per stampare le informazioni dell'oggetto User
@@ -55,7 +47,6 @@ class User{
         // var_dump($user_data);
 
         //stampa dell'array associativo tramite ciclo foreach
-        echo '<h1>'. $user_data['name'].' '.$user_data['lastname'].'</h1>';
         foreach ($user_data as $user_data_key => $user_data_value) {
             echo '<p>'.$user_data_key.': '.$user_data_value.'<p>';
         }
@@ -72,36 +63,39 @@ class User{
 
     }
 
-    public function setNote($text){
-        $this->note = $text;
-    }
 
-    public function setPremium(){
-        $this->premium = 1;
-    }
+
+    // public function setPremium(){
+    //     $this->premium = 1;
+    // }
 }
 
 //sotto classe di User con vantaggi premium account
-class PremiumUser extends User {
+class SubscriptionPayment extends User {
 
     public $User_id;
     public $name;
     public $lastname;
     public $email;
     public $date_of_birth;
+    public $Payment_id;
     public $payment_method;
-    public $premium;
+    public $payment_made;
     public $note;
 
-    //premium
-    public $PremiumUser_id = - 1;
-    //sconto di default
-    public $discount = 20;
+    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_Payment_id, $_payment_method, $_payment_made){
+        parent::__construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_Payment_id, $_payment_method, $_payment_made);
 
-    public function __construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_payment_method, $_premium, $_tmp_PremiumUser_id){
-        parent::__construct($_User_id, $_name, $_lastname, $_email, $_date_of_birth, $_payment_method, $_premium, $_tmp_PremiumUser_id);
-        $this->PremiumUser_id = $_tmp_PremiumUser_id;
+        $this->Payment_id = $_Payment_id;
+        $this->payment_method = $_payment_method;
+        $this->payment_made = $_payment_made;
+
     }
+
+    public function setNote($text){
+        $this->note = $text;
+    }
+
 
 
 }
